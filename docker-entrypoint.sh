@@ -83,7 +83,7 @@ if [[ "$1" == apache2* ]] || [ "$1" == php-fpm ]; then
 							'port'     => 27017,
 							'database' => '$LEARNINGLOCKER_DB_NAME',
 							'username' => '${LEARNINGLOCKER_DB_USER}',
-							'password' => '${LEARNINGLOCKER_DB_PASSWORD}'
+							'password' => '${LEARNINGLOCKER_DB_PASSWORD}',
 							'options' => array('replicaSet' => '${LEARNINGLOCKER_DB_REPLICA_SET}')
 						],
 					]
