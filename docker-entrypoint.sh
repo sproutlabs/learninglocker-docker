@@ -27,13 +27,13 @@ if [[ "$1" == apache2* ]] || [ "$1" == php-fpm ]; then
 	: ${LEARNINGLOCKER_DB_PASSWORD:-learninglocker}
 	: ${LEARNINGLOCKER_DB_NAME:=learninglocker}
 
-	if [ -z "$LEARNINGLOCKER_DB_PASSWORD" ]; then
-		echo >&2 'error: missing required LEARNINGLOCKER_DB_PASSWORD environment variable'
-		echo >&2 '  Did you forget to -e LEARNINGLOCKER_DB_PASSWORD=... ?'
-		echo >&2
-		echo >&2 '  (Also of interest might be LEARNINGLOCKER_DB_USER and LEARNINGLOCKER_DB_NAME.)'
-		exit 1
-	fi
+	# if [ -z "$LEARNINGLOCKER_DB_PASSWORD" ]; then
+	# 	echo >&2 'error: missing required LEARNINGLOCKER_DB_PASSWORD environment variable'
+	# 	echo >&2 '  Did you forget to -e LEARNINGLOCKER_DB_PASSWORD=... ?'
+	# 	echo >&2
+	# 	echo >&2 '  (Also of interest might be LEARNINGLOCKER_DB_USER and LEARNINGLOCKER_DB_NAME.)'
+	# 	exit 1
+	# fi
 
 	# Check if FQDN/HOSTNAME is set
 	: ${APP_URL:=$HOSTNAME}}
@@ -43,11 +43,11 @@ if [[ "$1" == apache2* ]] || [ "$1" == php-fpm ]; then
 	fi
 
 	# Create learninglocker user
-	echo "==> Creating user $LEARNINGLOCKER_DB_USER@$LEARNINGLOCKER_DB_PASSWORD on $LEARNINGLOCKER_DB_HOST/$LEARNINGLOCKER_DB_NAME"
-	cat > /tmp/createUser.js <<-EOF
-		use $LEARNINGLOCKER_DB_NAME;
-		db.createUser({ user: '$LEARNINGLOCKER_DB_USER', pwd: '$LEARNINGLOCKER_DB_PASSWORD', roles:[{ role: 'readWrite', db: '$LEARNINGLOCKER_DB_NAME' }] });
-	EOF
+	# echo "==> Creating user $LEARNINGLOCKER_DB_USER@$LEARNINGLOCKER_DB_PASSWORD on $LEARNINGLOCKER_DB_HOST/$LEARNINGLOCKER_DB_NAME"
+	# cat > /tmp/createUser.js <<-EOF
+	# 	use $LEARNINGLOCKER_DB_NAME;
+	# 	db.createUser({ user: '$LEARNINGLOCKER_DB_USER', pwd: '$LEARNINGLOCKER_DB_PASSWORD', roles:[{ role: 'readWrite', db: '$LEARNINGLOCKER_DB_NAME' }] });
+	# EOF
 	# mongo \
 		# --username "$MONGO_ADMIN_USER" \
 		# --password "$MONGO_ADMIN_PASSWORD" \
@@ -64,7 +64,9 @@ if [[ "$1" == apache2* ]] || [ "$1" == php-fpm ]; then
 						'driver'   => 'mongodb',
 						'host'     => '${LEARNINGLOCKER_DB_HOST}',
 						'port'     => 27017,
-						'database' => '$LEARNINGLOCKER_DB_NAME'
+						'database' => '$LEARNINGLOCKER_DB_NAME',
+						'username' => '${LEARNINGLOCKER_DB_USER}',
+						'password' => '${LEARNINGLOCKER_DB_PASSWORD}'
 					],
 				]
 			];
