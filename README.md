@@ -42,3 +42,4 @@ There are a number of defaults for these in `docker-compose.yml` as well
 
 - `LEARNINGLOCKER_DB_HOST`: (_optional_) If not linking to another docker container, hostname of the mongoDB server
 - `MONGO_WAIT_TIMEOUT`: (_optional_) Time to wait before mongo container becomes live. Defaults to 10 seconds
+- `LEARNINGLOCKER_DB_REPLICA_SET`: If you are using a mongo replica set the name here and change `LEARNINGLOCKER_DB_HOST` to be like `'ip-10-0-1-200.ap-southeast-2.compute.internal','ip-10-0-1-201.ap-southeast-2.compute.internal','ip-10-0-1-202.ap-southeast-2.compute.internal'` (the quotes are required, hostnames that match the replica set setup are also required http://php.net/manual/en/mongo.connecting.rs.php)

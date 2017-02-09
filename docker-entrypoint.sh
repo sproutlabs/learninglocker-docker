@@ -56,21 +56,40 @@ if [[ "$1" == apache2* ]] || [ "$1" == php-fpm ]; then
 
 	# Setup database connection to mongodb
 	if [ ! -e app/config/local/database.php ]; then
-		cat > app/config/local/database.php <<-EOF
-			<?php
-			return [
-				'connections' => [
-					'mongodb' => [
-						'driver'   => 'mongodb',
-						'host'     => '${LEARNINGLOCKER_DB_HOST}',
-						'port'     => 27017,
-						'database' => '$LEARNINGLOCKER_DB_NAME',
-						'username' => '${LEARNINGLOCKER_DB_USER}',
-						'password' => '${LEARNINGLOCKER_DB_PASSWORD}'
-					],
-				]
-			];
-		EOF
+		if [ -z "$LEARNINGLOCKER_DB_REPLICA_SET" ]; then
+			cat > app/config/local/database.php <<-EOF
+				<?php
+				return [
+					'connections' => [
+						'mongodb' => [
+							'driver'   => 'mongodb',
+							'host'     => '${LEARNINGLOCKER_DB_HOST}',
+							'port'     => 27017,
+							'database' => '$LEARNINGLOCKER_DB_NAME',
+							'username' => '${LEARNINGLOCKER_DB_USER}',
+							'password' => '${LEARNINGLOCKER_DB_PASSWORD}'
+						],
+					]
+				];
+			EOF
+		else
+			cat > app/config/local/database.php <<-EOF
+				<?php
+				return [
+					'connections' => [
+						'mongodb' => [
+							'driver'   => 'mongodb',
+							'host'     => array(${LEARNINGLOCKER_DB_HOST}),
+							'port'     => 27017,
+							'database' => '$LEARNINGLOCKER_DB_NAME',
+							'username' => '${LEARNINGLOCKER_DB_USER}',
+							'password' => '${LEARNINGLOCKER_DB_PASSWORD}'
+							'options' => array('replicaSet' => '${LEARNINGLOCKER_DB_REPLICA_SET}')
+						],
+					]
+				];
+			EOF
+		fi
 		php artisan migrate
 	fi
 

@@ -10,8 +10,8 @@ services:
              - "28017:28017"
     learninglocker:
         build: .
-        # depends_on:
-        #     - mongo
+        depends_on:
+            - mongo
         ports:
             - "80:80"
         environment:
@@ -19,7 +19,7 @@ services:
             LEARNINGLOCKER_DB_HOST: 'mongo'
             LEARNINGLOCKER_DB_NAME: 'learninglocker'
             LEARNINGLOCKER_DB_USER: ''  # change if needed
-            LEARNINGLOCKER_DB_PASSWORD: ''
+            LEARNINGLOCKER_DB_PASSWORD: '' # change if needed
             APP_SECRET_KEY: 'CHANGEME12345678'
             SMTP_SERVER: 'smtp.sendgrid.net'
             SMTP_PORT: 587
