@@ -14,6 +14,7 @@ services:
             - mongo
         ports:
             - "80:80"
+            - "81:81"
         environment:
             APP_URL: 'example.com'
             LEARNINGLOCKER_DB_HOST: 'mongo'
@@ -21,9 +22,9 @@ services:
             LEARNINGLOCKER_DB_USER: ''  # change if needed
             LEARNINGLOCKER_DB_PASSWORD: '' # change if needed
             APP_SECRET_KEY: 'CHANGEME12345678'
-            SMTP_SERVER: 'smtp.sendgrid.net'
+            SMTP_SERVER: 'smtp.sparkpost.com'
             SMTP_PORT: 587
-            SMTP_USER: 'smtp-username'
+            SMTP_USER: 'SMTP_INJECTION'
             SMTP_PASSWORD: 'smtp-password'
             EMAIL_FROM_NAME: 'Learning Locker LRS Docker Container'
             EMAIL_FROM_ADDRESS: 'lrs@example.com'

@@ -2,7 +2,6 @@
 
 set -e
 
-if [[ "$1" == apache2* ]] || [ "$1" == php-fpm ]; then
 		if [ -z "$LEARNINGLOCKER_DB_HOST" ]; then
 			LEARNINGLOCKER_DB_HOST='mongo'
 		else
@@ -17,10 +16,10 @@ if [[ "$1" == apache2* ]] || [ "$1" == php-fpm ]; then
 		exit 1
 	fi
 
-	: ${MONGO_WAIT_TIMEOUT:=${MONGO_WAIT_TIMEOUT:-10}}
-	echo -n "Sleeping for $MONGO_WAIT_TIMEOUT seconds while wating for mongodb to come alive..."
-	sleep $MONGO_WAIT_TIMEOUT;
-	echo 'Done, and awake now.'
+	#: ${MONGO_WAIT_TIMEOUT:=${MONGO_WAIT_TIMEOUT:-10}}
+	#echo -n "Sleeping for $MONGO_WAIT_TIMEOUT seconds while wating for mongodb to come alive..."
+	#sleep $MONGO_WAIT_TIMEOUT;
+	#echo 'Done, and awake now.'
 
 	# If we're linked to MongoDB and thus have credentials already, let's use them
 	: ${LEARNINGLOCKER_DB_USER:=learninglocker}
@@ -133,7 +132,5 @@ if [[ "$1" == apache2* ]] || [ "$1" == php-fpm ]; then
 		];
 		EOF
 	fi
-fi
 
-source /etc/apache2/envvars
 exec "$@"
