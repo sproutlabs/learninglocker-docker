@@ -52,7 +52,7 @@ USER www-data
 
 WORKDIR /var/www/html
 RUN composer install
-EXPOSE 80
+EXPOSE 80, 81
 
 USER root
 
