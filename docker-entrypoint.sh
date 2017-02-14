@@ -16,6 +16,10 @@ set -e
 		exit 1
 	fi
 
+	if [ ! -z "$LOAD_BALANCER" ]; then
+		sed -i 's/App::before(function($request) {});/App::before(function($request) {Request::setTrustedProxies( [ $request->getClientIp() ] ); });/g' /var/www/html/app/filters.php
+	fi
+
 	#: ${MONGO_WAIT_TIMEOUT:=${MONGO_WAIT_TIMEOUT:-10}}
 	#echo -n "Sleeping for $MONGO_WAIT_TIMEOUT seconds while wating for mongodb to come alive..."
 	#sleep $MONGO_WAIT_TIMEOUT;

@@ -4,6 +4,8 @@ This is fork of [`hongymagic/learninglocker`](https://gitlab.com/hongymagic/lear
 This is a HTTP **application-only** container for [Learning Locker](http://learninglocker.net).
 As such, link to a running mongoDB container or external mongoDB host is required.
 
+If you are running it behind a load balancer set the `LOAD_BALANCER` env variable to something otherwise your assets won't get the right path
+
 #### Example usage
 
 1. Create a mongoDB instance (example using docker container). [`mongodb`](https://hub.docker.com/_/mongodb/)
