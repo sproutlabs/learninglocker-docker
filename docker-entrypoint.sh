@@ -20,10 +20,7 @@ set -e
 		sed -i 's/App::before(function($request) {});/App::before(function($request) {Request::setTrustedProxies( [ $request->getClientIp() ] ); });/g' /var/www/html/app/filters.php
 	fi
 
-	#: ${MONGO_WAIT_TIMEOUT:=${MONGO_WAIT_TIMEOUT:-10}}
-	#echo -n "Sleeping for $MONGO_WAIT_TIMEOUT seconds while wating for mongodb to come alive..."
-	#sleep $MONGO_WAIT_TIMEOUT;
-	#echo 'Done, and awake now.'
+	echo 'opcache.enable_cli=0' > /usr/local/etc/php/conf.d/cli.ini 
 
 	# If we're linked to MongoDB and thus have credentials already, let's use them
 	: ${LEARNINGLOCKER_DB_USER:=learninglocker}
@@ -136,5 +133,5 @@ set -e
 		];
 		EOF
 	fi
-
+echo "starting"
 exec "$@"
