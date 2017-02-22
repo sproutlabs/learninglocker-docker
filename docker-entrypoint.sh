@@ -20,7 +20,8 @@ set -e
 		sed -i 's/App::before(function($request) {});/App::before(function($request) {Request::setTrustedProxies( [ $request->getClientIp() ] ); });/g' /var/www/html/app/filters.php
 	fi
 
-	echo 'opcache.enable_cli=0' > /usr/local/etc/php/conf.d/cli.ini 
+	echo 'opcache.enable_cli=0
+	zend.enable_gc = 0' > /usr/local/etc/php/conf.d/cli.ini
 
 	# If we're linked to MongoDB and thus have credentials already, let's use them
 	: ${LEARNINGLOCKER_DB_USER:=learninglocker}
