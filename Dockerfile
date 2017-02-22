@@ -52,7 +52,7 @@ USER www-data
 
 WORKDIR /var/www/html
 RUN composer install
-RUN mkdir -p /var/www/html/public/js-localization/messages && cp vendor/andywer/js-localization/public/js/localization.js /var/www/html/public/js-localization/messages/localization.js 
+RUN mkdir -p /var/www/html/public/js-localization/ && cp vendor/andywer/js-localization/public/js/localization.js /var/www/html/public/js-localization/localization.js 
 EXPOSE 80
 EXPOSE 81
 
