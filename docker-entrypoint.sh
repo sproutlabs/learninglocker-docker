@@ -21,7 +21,8 @@ set -e
 	fi
 
 	echo 'opcache.enable_cli=0
-	zend.enable_gc = 0' > /usr/local/etc/php/conf.d/cli.ini
+	zend.enable_gc = 0
+	opcache.fast_shutdown=0' > /usr/local/etc/php/conf.d/cli.ini
 
 	# If we're linked to MongoDB and thus have credentials already, let's use them
 	: ${LEARNINGLOCKER_DB_USER:=learninglocker}
@@ -91,7 +92,7 @@ set -e
 				];
 			EOF
 		fi
-		php artisan migrate
+		#php artisan migrate
 	fi
 
 	# 'username' => '$LEARNINGLOCKER_DB_USER',
