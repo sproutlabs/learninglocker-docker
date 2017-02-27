@@ -92,7 +92,9 @@ set -e
 				];
 			EOF
 		fi
+		echo "Running the migration command"
 		php artisan migrate
+		echo "Migration command finished"
 	fi
 
 	# 'username' => '$LEARNINGLOCKER_DB_USER',
