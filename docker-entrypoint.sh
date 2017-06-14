@@ -56,6 +56,9 @@ set -e
 		# "${LEARNINGLOCKER_DB_HOST}/admin" < /tmp/createUser.js
 	# rm /tmp/createUser.js
 
+        # Set the MongoDB port to a default value if the user didn't provide one
+        LEARNINGLOCKER_DB_PORT=${LEARNINGLOCKER_DB_PORT:-27017}
+
 	# Setup database connection to mongodb
 	if [ ! -e app/config/local/database.php ]; then
 		if [ -z "$LEARNINGLOCKER_DB_REPLICA_SET" ]; then
@@ -66,7 +69,7 @@ set -e
 						'mongodb' => [
 							'driver'   => 'mongodb',
 							'host'     => '${LEARNINGLOCKER_DB_HOST}',
-							'port'     => 27017,
+							'port'     => '${LEARNINGLOCKER_DB_PORT}',
 							'database' => '$LEARNINGLOCKER_DB_NAME',
 							'username' => '${LEARNINGLOCKER_DB_USER}',
 							'password' => '${LEARNINGLOCKER_DB_PASSWORD}'
@@ -82,7 +85,7 @@ set -e
 						'mongodb' => [
 							'driver'   => 'mongodb',
 							'host'     => array(${LEARNINGLOCKER_DB_HOST}),
-							'port'     => 27017,
+							'port'     => '${LEARNINGLOCKER_DB_PORT}',
 							'database' => '$LEARNINGLOCKER_DB_NAME',
 							'username' => '${LEARNINGLOCKER_DB_USER}',
 							'password' => '${LEARNINGLOCKER_DB_PASSWORD}',

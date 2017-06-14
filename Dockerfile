@@ -12,7 +12,7 @@ COPY conf/supervisord.conf /etc/
 
 # Install the PHP extensions we need
 #RUN docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr
-RUN docker-php-ext-install opcache zip mcrypt mbstring > /dev/null 2>&1
+RUN docker-php-ext-install pcntl bcmath opcache zip mcrypt mbstring > /dev/null 2>&1
 
 # Install PHP pecl mongo
 COPY bin/* /usr/local/bin/
