@@ -47,6 +47,7 @@ RUN curl -L -o learninglocker.tar.gz `curl -s https://api.github.com/repos/Learn
 	&& chown -R www-data /var/www/html
 
 RUN mkdir -p /var/www/api && ln -s  /var/www/html/public /var/www/api/ll && chown www-data /var/www/api/ll
+RUN chown -R www-data:www-data /var/lib/nginx
 
 USER www-data
 
