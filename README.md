@@ -1,3 +1,5 @@
+# With the release of Learning Locker 2 this repository has been depreciated and will no longer be updated. For setting up Learning Locker 2 with Docker please see https://github.com/michzimny/learninglocker2-docker
+
 ### Learning Locker LRS Docker container
 This is fork of [`hongymagic/learninglocker`](https://gitlab.com/hongymagic/learninglocker) the main modifications are around removing the inbuilt SSL support (so you can use it behind a LB) and also the mongoDB user setup
 
